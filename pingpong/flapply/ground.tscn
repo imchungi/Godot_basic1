@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://00gn5ucqpa75"]
+
+[ext_resource type="Script" uid="uid://bu0o00pptgnu0" path="res://area_2d.gd" id="1_7xfnb"]
+[ext_resource type="Texture2D" uid="uid://cum5khv3jtce1" path="res://flapply/assets/ground.png" id="2_knlbg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sikx4"]
+size = Vector2(2336, 166)
+
+[node name="Ground" type="Area2D"]
+script = ExtResource("1_7xfnb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1170.75, 754)
+scale = Vector2(1.35098, 1)
+texture = ExtResource("2_knlbg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1173, 756)
+shape = SubResource("RectangleShape2D_sikx4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

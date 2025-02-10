@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bko7hp4fo2gx5"]
+
+[ext_resource type="Script" uid="uid://2ga7kfdmvlvx" path="res://flapply/flapply.gd" id="1_endhj"]
+[ext_resource type="Texture2D" uid="uid://d38ceuoo614k4" path="res://flapply/assets/bg.png" id="1_hk1oh"]
+[ext_resource type="PackedScene" uid="uid://dkcqlgkojokfi" path="res://flapply/pipe.tscn" id="2_wn4tr"]
+[ext_resource type="PackedScene" uid="uid://ckcfdcfqu48tv" path="res://flapply/bird.tscn" id="2_xybsa"]
+[ext_resource type="PackedScene" uid="uid://00gn5ucqpa75" path="res://flapply/ground.tscn" id="4_dn6lv"]
+[ext_resource type="PackedScene" uid="uid://4vn1hnj12w3j" path="res://flapply/game_over.tscn" id="6_jskoh"]
+
+[node name="Flapply" type="Node2D"]
+script = ExtResource("1_endhj")
+pipe_scene = ExtResource("2_wn4tr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -37.0
+offset_top = -140.0
+offset_right = 1153.0
+offset_bottom = 628.0
+texture = ExtResource("1_hk1oh")
+
+[node name="bird" parent="." instance=ExtResource("2_xybsa")]
+position = Vector2(132, 297)
+
+[node name="Ground" parent="." instance=ExtResource("4_dn6lv")]
+position = Vector2(0, -83)
+
+[node name="PipeTimer" type="Timer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 1
+offset_left = 464.0
+offset_top = 19.0
+offset_right = 645.0
+offset_bottom = 74.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "SCORE : 0"
+
+[node name="GameOver" parent="." instance=ExtResource("6_jskoh")]
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
